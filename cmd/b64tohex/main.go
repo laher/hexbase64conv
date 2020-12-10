@@ -11,7 +11,10 @@ func main() {
 	b64 := os.Args[1]
 	b, err := base64.StdEncoding.DecodeString(b64)
 	if err != nil {
-		panic(err)
+		b, err = base64.URLEncoding.DecodeString(b64)
+		if err != nil {
+			panic(err)
+		}
 	}
 	fmt.Println(hex.EncodeToString(b))
 }
